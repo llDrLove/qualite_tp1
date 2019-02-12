@@ -17,36 +17,34 @@
  * Copyright (C) 2002 University of Waikato 
  */
 
-package weka.classifiers;
+package weka.filters;
+
+import weka.test.WekaTestSuite;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
- * 
+ * Test class for all filters. Run from the command line with:<p/>
+ * java weka.filters.AllTests
+ *
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
+ * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests
+public class AllTests 
   extends WekaTestSuite {
 
   public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
+    TestSuite suite = (TestSuite) suite("weka.filters.Filter");
+    
+    suite.addTest(AllFilterTest.suite());
+    suite.addTest(MultiFilterTest.suite());
+    
     return suite;
   }
 
-  public static void main(String[] args) {
+  public static void main(String []args) {
     junit.textui.TestRunner.run(suite());
   }
 }

@@ -14,39 +14,41 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright (C) 2005 University of Waikato, Hamilton, New Zealand
  */
 
-package weka.classifiers;
+package weka.classifiers.meta;
+
+import weka.classifiers.AbstractClassifierTest;
+import weka.classifiers.Classifier;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
- * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
+ * Tests Vote. Run from the command line with:<p/>
+ * java weka.classifiers.meta.VoteTest
+ *
+ * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests
-  extends WekaTestSuite {
+public class VoteTest 
+  extends AbstractClassifierTest {
 
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+  public VoteTest(String name) { 
+    super(name);  
   }
 
-  public static void main(String[] args) {
+  /** Creates a default Vote */
+  public Classifier getClassifier() {
+    return new Vote();
+  }
+
+  public static Test suite() {
+    return new TestSuite(VoteTest.class);
+  }
+
+  public static void main(String[] args){
     junit.textui.TestRunner.run(suite());
   }
 }

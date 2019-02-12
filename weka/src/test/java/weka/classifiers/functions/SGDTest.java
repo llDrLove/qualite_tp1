@@ -14,39 +14,44 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright 2010 University of Waikato
  */
 
-package weka.classifiers;
+package weka.classifiers.functions;
+
+import weka.classifiers.AbstractClassifierTest;
+import weka.classifiers.Classifier;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
- * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
+ * Tests SGD. Run from the command line with:<p>
+ * java weka.classifiers.functions.SGDTest
+ *
+ * @author Mark Hall
  * @version $Revision$
  */
-public class AllTests
-  extends WekaTestSuite {
+public class SGDTest extends AbstractClassifierTest {
+
+  public SGDTest(String name) { super(name);  }
+
+  /** Creates a default SGD */
+  public Classifier getClassifier() {
+    SGD p = new SGD();
+    p.setDontNormalize(true);
+    p.setDontReplaceMissing(true);
+    p.setEpochs(1);
+    p.setLearningRate(0.001);
+    return p;
+  }
 
   public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+    return new TestSuite(SGDTest.class);
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args){
     junit.textui.TestRunner.run(suite());
   }
+
 }

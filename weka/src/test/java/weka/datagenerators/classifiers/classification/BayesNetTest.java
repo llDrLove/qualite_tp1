@@ -14,39 +14,41 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright (C) 2005 University of Waikato, Hamilton, New Zealand
  */
 
-package weka.classifiers;
+package weka.datagenerators.classifiers.classification;
+
+import weka.datagenerators.AbstractDataGeneratorTest;
+import weka.datagenerators.DataGenerator;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
- * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
+ * Tests BayesNet. Run from the command line with:<p/>
+ * java weka.datagenerators.classifiers.classification.BayesNetTest
+ *
+ * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests
-  extends WekaTestSuite {
+public class BayesNetTest 
+  extends AbstractDataGeneratorTest {
 
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+  public BayesNetTest(String name) { 
+    super(name);  
   }
 
-  public static void main(String[] args) {
+  /** Creates a default BayesNet */
+  public DataGenerator getGenerator() {
+    return new BayesNet();
+  }
+
+  public static Test suite() {
+    return new TestSuite(BayesNetTest.class);
+  }
+
+  public static void main(String[] args){
     junit.textui.TestRunner.run(suite());
   }
 }

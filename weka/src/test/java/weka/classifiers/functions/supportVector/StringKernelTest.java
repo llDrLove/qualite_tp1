@@ -14,39 +14,41 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright (C) 2006 University of Waikato, Hamilton, New Zealand
  */
 
-package weka.classifiers;
+package weka.classifiers.functions.supportVector;
+
+import weka.classifiers.functions.supportVector.AbstractKernelTest;
+import weka.classifiers.functions.supportVector.Kernel;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
- * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
+ * Tests StringKernel. Run from the command line with:<p/>
+ * java weka.classifiers.functions.supportVector.StringKernelTest
+ *
+ * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests
-  extends WekaTestSuite {
+public class StringKernelTest 
+  extends AbstractKernelTest {
 
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+  public StringKernelTest(String name) { 
+    super(name);  
   }
 
-  public static void main(String[] args) {
+  /** Creates a default StringKernel */
+  public Kernel getKernel() {
+    return new StringKernel();
+  }
+
+  public static Test suite() {
+    return new TestSuite(StringKernelTest.class);
+  }
+
+  public static void main(String[] args){
     junit.textui.TestRunner.run(suite());
   }
 }

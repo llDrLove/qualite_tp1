@@ -14,39 +14,41 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright (C) 2005 University of Waikato, Hamilton, New Zealand
  */
 
-package weka.classifiers;
+package weka.datagenerators.classifiers.classification;
+
+import weka.datagenerators.AbstractDataGeneratorTest;
+import weka.datagenerators.DataGenerator;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
- * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
+ * Tests RDG1. Run from the command line with:<p/>
+ * java weka.datagenerators.classifiers.classification.RDG1Test
+ *
+ * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests
-  extends WekaTestSuite {
+public class RDG1Test 
+  extends AbstractDataGeneratorTest {
 
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+  public RDG1Test(String name) { 
+    super(name);  
   }
 
-  public static void main(String[] args) {
+  /** Creates a default RDG1 */
+  public DataGenerator getGenerator() {
+    return new RDG1();
+  }
+
+  public static Test suite() {
+    return new TestSuite(RDG1Test.class);
+  }
+
+  public static void main(String[] args){
     junit.textui.TestRunner.run(suite());
   }
 }

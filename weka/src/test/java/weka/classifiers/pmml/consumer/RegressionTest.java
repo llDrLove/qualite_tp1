@@ -14,36 +14,40 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright 2008 University of Waikato, Hamilton, New Zealand
  */
 
-package weka.classifiers;
+package weka.classifiers.pmml.consumer;
+
+import java.util.ArrayList;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
+ * Tests the pmml Regression classifier.
  * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
- * @version $Revision$
+ * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
+ * @version $Revision 1.0 $
  */
-public class AllTests
-  extends WekaTestSuite {
+public class RegressionTest extends AbstractPMMLClassifierTest {
+
+  public RegressionTest(String name) {
+    super(name);
+  }
+
+  @Override
+  protected void setUp() throws Exception {
+    m_modelNames = new ArrayList<String>();
+    m_dataSetNames = new ArrayList<String>();
+    m_modelNames.add("linear_regression_model.xml");
+    m_modelNames.add("ELNINO_REGRESSION_SIMPLE.xml");
+    m_dataSetNames.add("Elnino_small.arff");
+    m_dataSetNames.add("Elnino_small.arff");
+  }
 
   public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+    return new TestSuite(weka.classifiers.pmml.consumer.RegressionTest.class);
   }
 
   public static void main(String[] args) {

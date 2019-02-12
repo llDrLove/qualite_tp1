@@ -14,39 +14,39 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright 2002 University of Waikato
  */
 
-package weka.classifiers;
+package weka.classifiers.rules;
+
+import weka.classifiers.AbstractClassifierTest;
+import weka.classifiers.Classifier;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
- * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
+ * Tests M5Rules. Run from the command line with:<p>
+ * java weka.classifiers.rules.M5RulesTest
+ *
+ * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
  * @version $Revision$
  */
-public class AllTests
-  extends WekaTestSuite {
+public class M5RulesTest extends AbstractClassifierTest {
+
+  public M5RulesTest(String name) { super(name);  }
+
+  /** Creates a default M5Rules */
+  public Classifier getClassifier() {
+    return new M5Rules();
+  }
 
   public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+    return new TestSuite(M5RulesTest.class);
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args){
     junit.textui.TestRunner.run(suite());
   }
+
 }

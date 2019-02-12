@@ -14,39 +14,41 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright (C) 2006 University of Waikato, Hamilton, New Zealand
  */
 
-package weka.classifiers;
+package weka.clusterers;
+
+import weka.clusterers.AbstractClustererTest;
+import weka.clusterers.Clusterer;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
- * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
+ * Tests FilteredClusterer. Run from the command line with:<p/>
+ * java weka.clusterers.FilteredClustererTest
+ *
+ * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests
-  extends WekaTestSuite {
+public class FilteredClustererTest 
+  extends AbstractClustererTest {
 
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+  public FilteredClustererTest(String name) { 
+    super(name);  
   }
 
-  public static void main(String[] args) {
+  /** Creates a default FilteredClusterer */
+  public Clusterer getClusterer() {
+    return new FilteredClusterer();
+  }
+
+  public static Test suite() {
+    return new TestSuite(FilteredClustererTest.class);
+  }
+
+  public static void main(String[] args){
     junit.textui.TestRunner.run(suite());
   }
 }

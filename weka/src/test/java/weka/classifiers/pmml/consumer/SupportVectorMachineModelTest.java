@@ -14,36 +14,39 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright 2010 University of Waikato, Hamilton, New Zealand
  */
 
-package weka.classifiers;
+package weka.classifiers.pmml.consumer;
+
+import java.util.ArrayList;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
+ * Tests the pmml SupportVectorMachineModel classifier.
  * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
+ * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision$
  */
-public class AllTests
-  extends WekaTestSuite {
+public class SupportVectorMachineModelTest extends AbstractPMMLClassifierTest {
+
+  public SupportVectorMachineModelTest(String name) {
+    super(name);
+  }
+
+  @Override
+  protected void setUp() throws Exception {
+    m_modelNames = new ArrayList<String>();
+    m_dataSetNames = new ArrayList<String>();
+    m_modelNames.add("Audit_SVM.xml");
+    m_dataSetNames.add("Audit_SVM_small.arff");
+  }
 
   public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+    return new TestSuite(
+      weka.classifiers.pmml.consumer.SupportVectorMachineModelTest.class);
   }
 
   public static void main(String[] args) {

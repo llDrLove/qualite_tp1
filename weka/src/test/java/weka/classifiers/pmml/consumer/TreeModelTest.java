@@ -14,36 +14,40 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright 2009 University of Waikato, Hamilton, New Zealand
  */
 
-package weka.classifiers;
+package weka.classifiers.pmml.consumer;
+
+import java.util.ArrayList;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
+ * Tests the pmml TreeModel classifier.
  * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
+ * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision$
  */
-public class AllTests
-  extends WekaTestSuite {
+public class TreeModelTest extends AbstractPMMLClassifierTest {
+
+  public TreeModelTest(String name) {
+    super(name);
+  }
+
+  @Override
+  protected void setUp() throws Exception {
+    m_modelNames = new ArrayList<String>();
+    m_dataSetNames = new ArrayList<String>();
+    m_modelNames.add("IRIS_TREE.xml");
+    m_modelNames.add("HEART_TREE.xml");
+    m_dataSetNames.add("iris.arff");
+    m_dataSetNames.add("heart-c2.arff");
+  }
 
   public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+    return new TestSuite(weka.classifiers.pmml.consumer.TreeModelTest.class);
   }
 
   public static void main(String[] args) {

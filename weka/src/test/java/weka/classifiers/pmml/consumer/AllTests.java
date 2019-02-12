@@ -14,39 +14,35 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright 2008 University of Waikato, Hamilton, New Zealand
  */
 
-package weka.classifiers;
+package weka.classifiers.pmml.consumer;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
- * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
- * @version $Revision$
+ * Tests the pmml classifiers.
+ *
+ * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
+ * @version $Revision 1.0 $
  */
-public class AllTests
-  extends WekaTestSuite {
-
+public class AllTests extends TestSuite {
+ 
   public static Test suite() {
     TestSuite suite = new TestSuite();
 
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
+    suite.addTest(RegressionTest.suite());
+    suite.addTest(GeneralRegressionTest.suite());
+    suite.addTest(NeuralNetworkTest.suite());
+    suite.addTest(TreeModelTest.suite());
+    
     return suite;
   }
 
-  public static void main(String[] args) {
+
+  public static void main(String []args) {
     junit.textui.TestRunner.run(suite());
   }
 }

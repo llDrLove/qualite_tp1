@@ -17,36 +17,40 @@
  * Copyright (C) 2002 University of Waikato 
  */
 
-package weka.classifiers;
+package weka.filters.unsupervised.instance;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
+import weka.filters.AbstractFilterTest;
+import weka.filters.Filter;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
+ * Tests Resample. Run from the command line with:
+ * <p>
+ * java weka.filters.unsupervised.instance.RemoveDuplicatesTest
  * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
- * @version $Revision$
+ * @author Eibe Frank (eibe@cs.waikato.ac.nz)
+ * @version $Revision: 8034 $
  */
-public class AllTests
-  extends WekaTestSuite {
+public class RemoveDuplicatesTest extends AbstractFilterTest {
+
+  public RemoveDuplicatesTest(String name) {
+    super(name);
+  }
+
+  /** Creates a default Resample */
+  @Override
+  public Filter getFilter() {
+    RemoveDuplicates f = new RemoveDuplicates();
+    return f;
+  }
 
   public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+    return new TestSuite(RemoveDuplicatesTest.class);
   }
 
   public static void main(String[] args) {
     junit.textui.TestRunner.run(suite());
   }
+
 }

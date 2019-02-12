@@ -14,39 +14,47 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright (C) 2014 University of Waikato 
  */
 
-package weka.classifiers;
+package weka.filters.supervised.instance;
+
+import weka.filters.AbstractFilterTest;
+import weka.filters.Filter;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
- * 
+ * Tests Resample. Run from the command line with:<p>
+ * java weka.filters.supervised.instance.ClassBalancer
+ *
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
- * @version $Revision$
+ * @version $Revision: 8034 $
  */
-public class AllTests
-  extends WekaTestSuite {
+public class ClassBalancerTest extends AbstractFilterTest {
+  
+  public ClassBalancerTest(String name) { super(name);  }
+  
+  /** Creates a default StratifiedRemoveFolds */
+  public Filter getFilter() {
+    ClassBalancer f = new ClassBalancer();
+    return f;
+  }
+  
+  /** Remove string attributes from default fixture instances */
+  protected void setUp() throws Exception {
+    
+    super.setUp();
+    m_Instances.setClassIndex(1);
+  }
 
   public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+    return new TestSuite(ClassBalancerTest.class);
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args){
     junit.textui.TestRunner.run(suite());
   }
+
 }

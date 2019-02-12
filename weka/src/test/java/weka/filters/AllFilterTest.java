@@ -17,36 +17,42 @@
  * Copyright (C) 2002 University of Waikato 
  */
 
-package weka.classifiers;
+package weka.filters;
+
+import weka.core.Instances;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
- * 
+ * Tests AllFilter. Run from the command line with:<p>
+ * java weka.filters.AllFilterTest
+ *
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests
-  extends WekaTestSuite {
+public class AllFilterTest extends AbstractFilterTest {
+  
+  public AllFilterTest(String name) { super(name);  }
+
+  /** Creates a default AllFilter */
+  public Filter getFilter() {
+    return new AllFilter();
+  }
+
+  public void testTypical() {
+    Instances result = useFilter();
+    // Number of attributes and instances shouldn't change
+    assertEquals(m_Instances.numAttributes(), result.numAttributes());
+    assertEquals(m_Instances.numInstances(), result.numInstances());
+  }
 
   public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+    return new TestSuite(AllFilterTest.class);
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args){
     junit.textui.TestRunner.run(suite());
   }
+
 }

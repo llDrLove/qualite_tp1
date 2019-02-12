@@ -14,39 +14,38 @@
  */
 
 /*
- * Copyright (C) 2002 University of Waikato 
+ * Copyright (C) 2007 University of Waikato, Hamilton, New Zealand
  */
 
-package weka.classifiers;
+package weka.core.neighboursearch;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import weka.test.WekaTestSuite;
 
 /**
- * Test class for all classifiers. Run from the command line with:
- * <p/>
- * java weka.classifiers.AllTests
- * 
- * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
- * @author FracPete (frapcete at waikato dot ac dot nz)
+ * Tests BallTree. Run from the command line with: <p/>
+ * java weka.core.neighboursearch.BallTreeTest
+ *
+ * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests
-  extends WekaTestSuite {
+public class BallTreeTest
+  extends AbstractNearestNeighbourSearchTest {
 
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
-
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-
-    return suite;
+  public BallTreeTest(String name) {
+    super(name);
   }
 
-  public static void main(String[] args) {
+  /** Creates a default BallTree */
+  public NearestNeighbourSearch getNearestNeighbourSearch() {
+    return new BallTree();
+  }
+  
+  public static Test suite() {
+    return new TestSuite(BallTreeTest.class);
+  }
+
+  public static void main(String[] args){
     junit.textui.TestRunner.run(suite());
   }
 }
