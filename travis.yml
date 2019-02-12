@@ -1,0 +1,5 @@
+language: java
+install: ant deps
+script:
+        - cd ./weka
+        - ant run_tests_core
