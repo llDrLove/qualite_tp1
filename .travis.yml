@@ -1,4 +1,6 @@
 language: java
 script:
         - cd ./weka
+        - ant compile
+        - ant jar
         - ant test
