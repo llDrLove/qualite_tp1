@@ -1,5 +1,4 @@
 language: java
 script:
         - cd ./weka
-        - ant
-        - ant test
+        - ant run_tests_core
